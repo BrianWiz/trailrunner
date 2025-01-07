@@ -1,0 +1,25 @@
+[package]
+name = "trailrunner"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+matchbox_socket = "0.11.0"
+log = { version = "0.4", default-features = false }
+serde = { version = "1.0.217", features = ["derive"] }
+bincode = "1.3.2"
+
+[dev-dependencies]
+futures-timer = { version = "3", features = ["wasm-bindgen"] }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+console_error_panic_hook = "0.1.7"
+console_log = "1.0"
+futures = { version = "0.3", default-features = false }
+wasm-bindgen-futures = "0.4.29"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+futures = "0.3"
+tokio = "1.32"
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
