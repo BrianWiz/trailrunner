@@ -34,3 +34,8 @@ Trailrunner aims to be a convenience wrapper, it currently supports the followin
 
 ## Examples
 Please check out the [basic example](https://github.com/BrianWiz/trailrunner/blob/main/trailrunner/examples/basic.rs)
+- Make sure you run a `matchbox_server`:
+  - Easiest way is to install matchbox server:
+      - `cargo install matchbox_server`
+      - then run `matchbox_server`
+
