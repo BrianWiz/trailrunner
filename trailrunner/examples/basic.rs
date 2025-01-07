@@ -21,11 +21,11 @@ impl TApp<User> for App {
     type Application = App;
     type Message = MyMessage;
 
-    fn get_users(&mut self) -> &mut UserList<User> {
+    fn users(&mut self) -> &mut UserList<User> {
         &mut self.users
     }
 
-    fn get_message_queue(&mut self) -> &mut MessageQueue<User, Self::Application, Self::Message> {
+    fn message_queue(&mut self) -> &mut MessageQueue<User, Self::Application, Self::Message> {
         &mut self.message_queue
     }
 
@@ -58,11 +58,8 @@ impl TApp<User> for App {
         // nothing
     }
 
-    fn on_post_user_connected(&mut self, peer_id: PeerId) {
-
+    fn post_user_connected(&mut self, peer_id: PeerId) {
         info!("User connected {}... sending them a hello that expects an ack.", peer_id);
-
-        // say hello to them and expect a response back
         self.message_queue.enqueue(Message::new(
             MyMessage::String("Hello!".to_string())
         )
@@ -73,7 +70,7 @@ impl TApp<User> for App {
         );
     }
 
-    fn on_post_user_disconnected(&mut self, peer_id: PeerId) {
+    fn post_user_disconnected(&mut self, peer_id: PeerId) {
 
     }
 }

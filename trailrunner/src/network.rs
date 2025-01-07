@@ -163,13 +163,13 @@ where
                     let users = self.app.get_users_mut();
                     let user = U::new(peer_id);
                     users.insert(peer_id, user);
-                    self.app.on_post_user_connected(peer_id);
+                    self.app.post_user_connected(peer_id);
                     info!("Peer connected: {peer_id}");
                 }
                 PeerState::Disconnected => {
                     info!("Peer disconnected: {peer_id}");
                     match self.app.get_users_mut().remove(&peer_id){
-                        Some(_) => self.app.on_post_user_disconnected(peer_id),
+                        Some(_) => self.app.post_user_disconnected(peer_id),
                         None => warn!("Peer disconnected but no user found"),
                     }
                 }
@@ -240,7 +240,7 @@ where
         }
 
         // Send any messages waiting to be sent
-        for mut message in self.app.get_message_queue().drain(..) {
+        for mut message in self.app.message_queue().drain(..) {
 
             message.id = self.next_message_id;
 

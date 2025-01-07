@@ -68,8 +68,8 @@ pub trait TApp<U: TUser> {
 
     // User must implement these
 
-    fn get_users(&mut self) -> &mut UserList<U>;
-    fn get_message_queue(&mut self) -> &mut MessageQueue<U, Self::Application, Self::Message>;
+    fn users(&mut self) -> &mut UserList<U>;
+    fn message_queue(&mut self) -> &mut MessageQueue<U, Self::Application, Self::Message>;
 
     /// Called when a message is received. The id is the id of the message, from_peer is the peer that sent the message, and message is the message itself.
     fn receive(&mut self, id: MessageId, from_peer: PeerId, message: &Self::Message);
@@ -82,10 +82,10 @@ pub trait TApp<U: TUser> {
 
     // No need to implement these
 
-    fn on_post_user_connected(&mut self, _peer_id: PeerId) {}
-    fn on_post_user_disconnected(&mut self, _peer_id: PeerId) {}
+    fn post_user_connected(&mut self, _peer_id: PeerId) {}
+    fn post_user_disconnected(&mut self, _peer_id: PeerId) {}
 
     fn get_users_mut(&mut self) -> &mut UserList<U> {
-        self.get_users()
+        self.users()
     }
 }
