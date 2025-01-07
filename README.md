@@ -5,17 +5,11 @@ An experimental, opinionated convenience wrapper around [matchbox](https://githu
 Trailrunner aims to be a convenience wrapper, it currently supports the following features:
 - Application Level Acknowledgement (only works if connection is set to reliable).
   - ```rust
-      fn on_post_user_connected(&mut self, peer_id: PeerId) {
-          info!("User connected {}... sending them a hello that expects an ack.", peer_id);
-          self.message_queue.enqueue(Message::new(
-              MyMessage::String("Hello!".to_string())
-          )
-              .to_peer(peer_id)
-              .with_ack_handler(|_app, id, from_peer, message| {
-                  info!("Received ack for message {} from peer {} {:?}", id, from_peer, message);
-              })
-          );
-      }
+        self.message_queue.send(MyMessage::String("Hello, World!".into()))
+            .to_peer(peer_id)
+            .with_response_handler(|_app, id, from_peer, message| {
+                info!("Received ack for message {} from peer {} {:?}", id, from_peer, message);
+            });
     ```
 - Broadcast to all peers:
   - You can broadcast to all peers by simply not calling `.to_peer()`. If it expects an ack, it will fire the response for each peer only after all peers have acked
