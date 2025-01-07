@@ -20,7 +20,7 @@ Trailrunner aims to be a convenience wrapper, it currently supports the followin
 - Broadcast to all peers:
   - You can broadcast to all peers by simply not calling `.to_peer()`. If it expects an ack, it will fire the response for each peer only after all peers have acked
 - Message:
-  - You define a Message struct, which can have any arbitrary data you want as long as [bincode](https://crates.io/crates/bincode) & [serde](https://crates.io/crates/serde) support it.
+  - You define a Message struct or enum, which can have any arbitrary data you want as long as [bincode](https://crates.io/crates/bincode) & [serde](https://crates.io/crates/serde) support it.
 - User:
   - You define a User struct by implementing `TUser`. Users are available via `get_user_list()` on the Application where you can fetch a user via peer id
 - Application:
