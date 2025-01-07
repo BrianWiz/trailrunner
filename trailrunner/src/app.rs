@@ -22,11 +22,11 @@ use crate::prelude::*;
 ///     type Application = App;
 ///     type Message = MyMessage;
 ///
-///     fn get_users(&mut self) -> &mut UserList<User> {
+///     fn users(&mut self) -> &mut UserList<User> {
 ///         &mut self.users
 ///     }
 ///
-///     fn get_message_queue(&mut self) -> &mut MessageQueue<User, Self::Application, Self::Message> {
+///     fn message_queue(&mut self) -> &mut MessageQueue<User, Self::Application, Self::Message> {
 ///         &mut self.message_queue
 ///     }
 ///
